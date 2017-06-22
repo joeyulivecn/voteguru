@@ -1,0 +1,24 @@
+{
+  "name": "voteguru",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "karma": "latest",
+    "karma-jasmine": "latest",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "path": "latest"
+  },
+  "devDependencies": {
+    "karma-chrome-launcher": "latest",
+    "requirejs": "latest"
+  },
+  "engines": {
+    "node": "latest"
+  }
+}
