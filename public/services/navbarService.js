@@ -6,12 +6,12 @@
 
     angular
         .module('plunker')
-        .factory('navbarService', ['voteGuruService', function (voteGuruService){
+        .factory('navbarService', ['voteGuruService', 'authService', function (voteGuruService, authService){
 
             return{
 
                 showSignup: function () {
-                    if (voteGuruService.getToState() === 'home' || voteGuruService.getToState() === 'login') {
+                    if (authService.isNotLogOn()) {
                         return true;
                     }
                     else {
@@ -19,7 +19,7 @@
                     }
                 },
                 showLogin: function () {
-                    if (voteGuruService.getToState() === 'home' || voteGuruService.getToState() === 'signup') {
+                    if (authService.isNotLogOn()) {
                         return true;
                     }
                     else {
@@ -27,7 +27,7 @@
                     }
                 },
                 showSettingsOrLogout: function () {
-                    if (voteGuruService.getToState() === 'home' || voteGuruService.getToState() === 'signup' || voteGuruService.getToState() === 'login') {
+                    if (authService.isNotLogOn()) {
                         return false;
                     }
                     else {

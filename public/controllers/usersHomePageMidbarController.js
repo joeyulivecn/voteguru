@@ -24,7 +24,7 @@
         function goToNewPolls(){
             voteGuruService.setNewPollFlag(true);
             //setSelectedPoll();
-            //$state.go('usersHomePage');
+            $state.go('usersHomePage');
             $rootScope.$broadcast('createNewPoll');
         }
 

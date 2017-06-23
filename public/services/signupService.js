@@ -1,14 +1,14 @@
 /**
  * Created by sohamchakraborty on 10/27/15.
  */
-(function  (){
+(function () {
     'use strict';
 
     angular
         .module('plunker')
         .factory('signupService', signupService);
 
-    function signupService(voteGuruService){
+    function signupService(authService, voteGuruService) {
         var errorMessage = "";
 
         return {
@@ -42,15 +42,15 @@
                 return false;
             },
 
-            validate: function(formData, data) {
+            validate: function (formData, data) {
                 var len = data.length;
                 var validation = false;
                 for (var i = 0; i < len; i++) {
                     if (data[i].username === formData.username && data[i].password === formData.password) {
                         validation = true;
                         voteGuruService.setUser(data[i]);
+                        authService.setCredential(formData.username, formData.password);
                     }
-
                 }
                 return validation;
             }

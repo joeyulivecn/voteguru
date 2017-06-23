@@ -12,10 +12,10 @@ angular
                         templateUrl: 'views/navbar.html'
                     },
                     content: {
-                        templateUrl: 'views/home.html'
+                        templateUrl: 'views/myPollsPageContent.html'
                     },
                     midbar: {
-                        templateUrl: 'views/midbar.html'
+                        templateUrl: 'views/usersHomePageMidbar.html'
                     }
                 }
 

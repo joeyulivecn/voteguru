@@ -1,12 +1,12 @@
 /**
  * Created by sohamchakraborty on 10/27/15.
  */
-(function (){
+(function () {
     'use strict';
 
     angular
         .module('plunker')
-        .service('graphService', [ 'voteGuruService', function (voteGuruService) {
+        .service('graphService', ['voteGuruService', function (voteGuruService) {
 
             return {
                 loadBarDataForGraphs: function (data, labels) {
@@ -15,23 +15,29 @@
                     barData.datasets = [];
                     barData.datasets[0] = {};
                     barData.datasets[0].data = data;
+                    barData.datasets[0].fillColor = "rgba(151,187,205,0.5)";
+                    barData.datasets[0].strokeColor = "rgba(151,187,205,1)";
                     return barData;
                 },
                 loadGraphData: function () {
                     var data = [];
                     var poll = voteGuruService.getPollForGraphs();
-                    var len = poll.Options.length;
-                    for (var i = 0; i < len; i++) {
-                        data.push(poll.Options[i].votes);
+                    if (poll) {
+                        var len = poll.Options.length;
+                        for (var i = 0; i < len; i++) {
+                            data.push(poll.Options[i].votes);
+                        }
                     }
                     return data;
                 },
                 loadGraphLabels: function () {
                     var labels = [];
                     var poll = voteGuruService.getPollForGraphs();
-                    var len = poll.Options.length;
-                    for (var i = 0; i < len; i++) {
-                        labels.push(poll.Options[i].option);
+                    if (poll) {
+                        var len = poll.Options.length;
+                        for (var i = 0; i < len; i++) {
+                            labels.push(poll.Options[i].option);
+                        }
                     }
                     return labels;
                 }
@@ -43,4 +49,4 @@
 
 
 
-    })();
+})();

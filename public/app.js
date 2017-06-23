@@ -1,4 +1,4 @@
-angular.module('plunker', ['ui.router', 'chart.js', 'ngMessages']);
+angular.module('plunker', ['ui.router', 'chart.js', 'ngMessages', 'ngCookies']);
 
 
 

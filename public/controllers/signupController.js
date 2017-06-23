@@ -6,7 +6,7 @@
         .controller('signupController', signupController);
 
 
-    function signupController($state, voteGuruService, signupService) {
+    function signupController($state, voteGuruService, signupService, authService) {
 
 
         var vm = this;
@@ -16,12 +16,14 @@
         vm.signup = signup;
         vm.userFormData = {};
         vm.closeErrorMessage = closeErrorMessage;
+        
 
         activate();
 
         function activate(){
             console.log("sign up controller activated");
             vm.errorMessage = "";
+            authService.clearCredential();
         }
 
         function closeErrorMessage() {
@@ -46,8 +48,8 @@
 
         function changeState(val){
             if(val === true) {
-                voteGuruService.setNewPollFlag(true);
-                $state.go('usersHomePage');
+                voteGuruService.setshowAllPollsFlag(true);
+                $state.go('myPollsPage');
             }
             else {
                 vm.errorMessage = "Username / Password does not exist"
