@@ -4,7 +4,7 @@ Changes:
 - optimize the workflows and fix bugs.
 
 
-You can see the app here - https://voteguru.herokuapp.com
+You can see the origin app here - https://voteguru.herokuapp.com
 
 # voteguru
 a simple voting application
