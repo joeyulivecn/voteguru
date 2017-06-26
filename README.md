@@ -1,3 +1,9 @@
+Changes:
+- add multiple language support.
+- add Json Web Token authentication.
+- optimize the workflows and fix bugs.
+
+
 You can see the app here - https://voteguru.herokuapp.com
 
 # voteguru
