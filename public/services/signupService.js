@@ -27,19 +27,9 @@
             setErrorMessage: function (message) {
                 errorMessage = message;
             },
+
             getErrorMessage: function () {
                 return errorMessage;
-            },
-
-            checkIfUsernameExists: function (userFormData, data) {
-                var len = data.length;
-                for (var i = 0; i < len; i++) {
-                    if (data[i].username === userFormData.username) {
-                        this.setErrorMessage("Username already exists - Please choose a different name");
-                        return true;
-                    }
-                }
-                return false;
             },
 
             validate: function (formData, data) {
@@ -56,9 +46,5 @@
             }
 
         }
-
-
     }
-
-
 })();

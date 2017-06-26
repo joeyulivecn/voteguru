@@ -1,7 +1,7 @@
 /**
  * Created by sohamchakraborty on 10/14/15.
  */
-(function (){
+(function () {
     'use strict';
 
     angular
@@ -17,21 +17,21 @@
         vm.activate = activate;
         vm.submit = submit;
 
-        function submit(){
-                vm.user.username = vm.username;
-                vm.user.password = vm.password;
-                voteGuruService.update(vm.user._id, vm.user).success(function(data){
-                    $state.go('usersHomePage');
-                })
+        function submit() {
+            vm.user.username = vm.username;
+            vm.user.password = vm.password;
+            voteGuruService.update(vm.user._id, vm.user).success(function (data) {
+                $state.go('usersHomePage');
+            })
         }
 
         activate();
 
-        function activate(){
+        function activate() {
             console.log("settings page controller activated");
-                var user = voteGuruService.getUser();
-            var id =user._id;
-            voteGuruService.getSingleUser(id, user).success(function(data){
+            var user = voteGuruService.getUser();
+            var id = user._id;
+            voteGuruService.getSingleUser(id, user).success(function (data) {
                 vm.user = data;
             });
         }

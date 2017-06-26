@@ -6,7 +6,7 @@
 
 
 
-var mongoose   = require('mongoose');
+var mongoose = require('mongoose');
 //console.log('mongoose = ', mongoose);
 
 
@@ -16,11 +16,11 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-
+var jwt = require("jsonwebtoken");
 //console.log('User = ', User);
 var morgan = require('morgan');
 var path = require('path');
-var config 	   = require('./config');
+var config = require('./config');
 
 // configuration ===========================================
 
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // configure our app to handle CORS requests
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
@@ -71,6 +71,9 @@ app.get('*', function (req, res) {
     res.sendfile(path.join(__dirname + '/public/index.html'));
 });
 
+process.on('uncaughtException', function(err) {
+    console.log(err);
+});
 
 app.listen(config.port);
 

@@ -27,20 +27,20 @@
 
                 <div class="col-sm-2">
                     <button class="btn btn-danger" ng-click="vm.deletePoll(pollObj)"
-                            ng-hide="vm.hideDeleteButton(pollObj)">Delete
+                            ng-hide="vm.hideDeleteButton(pollObj)">{{'Delete' | translate}}
                     </button>
                 </div>
 
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" ng-click="vm.editPoll(pollObj)">Edit</button>
+                    <button class="btn btn-primary" ng-click="vm.editPoll(pollObj)">{{'Edit' | translate}}</button>
                 </div>
 
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" ng-click="vm.vote(pollObj)">Vote</button>
+                    <button class="btn btn-primary" ng-click="vm.vote(pollObj)">{{'Vote' | translate}}</button>
                 </div>
 
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" ng-click="vm.viewResults(pollObj)">View Results</button>
+                    <button class="btn btn-primary" ng-click="vm.viewResults(pollObj)">{{'ViewResults' | translate}}</button>
                 </div>
             </div>
 

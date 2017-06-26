@@ -1,18 +1,28 @@
 <nav class="navbar navbar-inverse" ng-controller="navbarController as vm">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="home">VoteGuru</a>
+            <a class="navbar-brand" ui-sref="home">{{'AppTitle' | translate}}</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li><a ui-sref="home">Home</a></li>
-                <li><a ui-sref="signup" ng-if="vm.showSignup() ">Sign Up</a></li>
-                <li><a ui-sref="login" ng-if="vm.showLogin() ">Login</a></li>
-                <li><a ui-sref="settingPage" ng-if="vm.showSettingsOrLogout()">Settings</a></li>
-                <li><a ui-sref="login" ng-if="vm.showSettingsOrLogout()">Logout</a></li>
-                <li><a href="https://github.com/syosoh06/voteguru">Github</a></li>
+                <li><a ui-sref="home">{{'Home' | translate}}</a></li>
+                <li><a ui-sref="signup" ng-if="vm.showSignup() ">{{'SignUp' | translate}}</a></li>
+                <li><a ui-sref="login" ng-if="vm.showLogin() ">{{'Login' | translate}}</a></li>
+                <li><a ui-sref="settingPage" ng-if="vm.showSettingsOrLogout()">{{'Settings' | translate}}</a></li>
+                <li><a ui-sref="login" ng-if="vm.showSettingsOrLogout()" ng-click="vm.logout()">{{'Logout' | translate}}</a></li>
+                <li><a href="https://github.com/joeyulivecn/voteguru">Github</a></li>
+                <li>
+                </li>
                 <span class="col-sm-4"></span>
-
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简体中文<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href ng-click="vm.switchLanguage('en-us')">English</a></li>
+                        <li><a href ng-click="vm.switchLanguage('zh-cn')">简体中文</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

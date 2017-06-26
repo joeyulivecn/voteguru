@@ -1,6 +1,6 @@
 <div class="container" ng-controller="votingPageController as vm">
     <div class="text-center">
-        <h2 style="color: blue">Vote for {{vm.poll.name}}</h2>
+        <h2 style="color: blue">{{vm.poll.name}}</h2>
     </div>
     <form>
         <div ng-repeat="opt in vm.poll.Options" class="text-center">
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group text-center">
             <br>
-            <button type="button" class="btn btn-success" ng-click="vm.submit()">Submit</button>
+            <button type="button" class="btn btn-success" ng-click="vm.submit()">{{'Submit' | translate}}</button>
         </div>
     </form>
 </div>

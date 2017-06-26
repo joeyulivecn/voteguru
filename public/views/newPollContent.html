@@ -1,5 +1,5 @@
 <div class="container" ng-controller="newPollController as vm">
-    <h2 class="text-center" style="color: blue; bottom: 40px; position: relative">Create New Poll</h2>
+    <h2 class="text-center" style="color: blue; bottom: 40px; position: relative">{{'CreateNewPoll' | translate}}</h2>
     <div class="text-center">
         <form role="form" name="newPollForm">
             <div class="form-group text-center">
@@ -13,7 +13,7 @@
                         </div>
                         <div class="col-sm-4">
                             <button type="button" class="btn btn-danger" ng-click="vm.deleteOption($index)">
-                                Delete
+                                {{'Delete' | translate}}
                             </button>
                         </div>
                     </div>
@@ -22,10 +22,10 @@
 <!--<pre>vm.selectedPoll -- {{vm.selectedPoll | json}}</pre>-->
 
             <div class="form-group">
-                <button type="button" ng-click="vm.addMoreOptions()" class="btn btn-success text-center">More options</button>
+                <button type="button" ng-click="vm.addMoreOptions()" class="btn btn-success text-center">{{'MoreOptions' | translate}}</button>
             </div>
             <div class="form-group" >
-                <button type="submit" class="btn btn-success text-center" ng-click="vm.submit()">Submit</button>
+                <button type="submit" class="btn btn-success text-center" ng-click="vm.submit()">{{'Submit' | translate}}</button>
             </div>
 
         </form>

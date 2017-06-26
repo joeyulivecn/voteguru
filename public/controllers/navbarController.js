@@ -9,9 +9,7 @@
         .controller('navbarController', navbarController);
 
 
-    function navbarController(voteGuruService, navbarService) {
-
-
+    function navbarController(voteGuruService, navbarService, authService) {
         var vm = this;
 
         vm.activate = activate;
@@ -20,6 +18,7 @@
         vm.showSettingsOrLogout = showSettingsOrLogout;
         vm.showLogin = showLogin;
         vm.showSignup = showSignup;
+        vm.logout = logout;
 
         activate();
 
@@ -27,6 +26,10 @@
             console.log("navbar controller activated");
             vm.user = voteGuruService.getUser();
             // just getting user info
+        }
+
+        function logout(){
+            authService.clearCredential();
         }
 
         function showLogin() {

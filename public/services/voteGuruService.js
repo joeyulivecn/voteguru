@@ -4,7 +4,7 @@
 /**
  * Created by sohamchakraborty on 10/5/15.
  */
-(function (){
+(function () {
     'use strict';
 
     angular
@@ -13,17 +13,17 @@
 
     voteGuruService.$inject = ['$http'];
 
-    function voteGuruService($http){
+    function voteGuruService($http) {
 
-        var users=[];
+        var users = [];
         var user = {};
         var createNewPoll = false;
 
-        var filterPollsByUsername = function(username, allPolls){
-            var len=allPolls.length;
+        var filterPollsByUsername = function (username, allPolls) {
+            var len = allPolls.length;
             var myPolls = [];
-            for(var i=0; i<len; i++){
-                if(allPolls[i].username === username){
+            for (var i = 0; i < len; i++) {
+                if (allPolls[i].username === username) {
                     myPolls.push(allPolls[i]);
                 }
             }
@@ -37,9 +37,10 @@
         var pollForGraphs;
         var errorMessage = "";
 
-
-
         return {
+            authenticate: function (username, password) {
+                return $http.post('/api/auth', { username: username, password: password });
+            },
 
             setNewPollFlagIfEnteringHomePage: function () {
                 if (((this.getFromState() === 'login') || (this.getFromState() === 'signup')) && (this.getToState() === 'usersHomePage')) {
@@ -47,125 +48,126 @@
                 }
             },
 
-
-            setPollForGraphs: function(poll){
-                pollForGraphs=poll;
+            setPollForGraphs: function (poll) {
+                pollForGraphs = poll;
             },
-            getPollForGraphs: function(){
+            
+            getPollForGraphs: function () {
                 return pollForGraphs;
             },
 
-            getshowAllPollsFlag: function(){
+            getshowAllPollsFlag: function () {
                 return showAllPolls;
             },
-            setshowAllPollsFlag: function(flag){
+            setshowAllPollsFlag: function (flag) {
                 showAllPolls = flag;
             },
             getSinglePoll: function (id, poll) {
                 var url = ('/api/polls/' + id).toString();
-                return $http.get( url, poll);
+                return $http.get(url, poll);
             },
-            setNewPollFlag: function(flag){
+            setNewPollFlag: function (flag) {
                 createNewPoll = flag;
             },
-            getNewPollFlag: function(){
+            getNewPollFlag: function () {
                 return createNewPoll;
             },
 
-            deletePoll: function(poll){
+            deletePoll: function (poll) {
                 var url = ('/api/polls/' + poll._id).toString();
-                return $http.delete( url, poll);
+                return $http.delete(url, poll);
             },
 
-
-            getAllPolls: function(){
+            getAllPolls: function () {
                 return $http.get('/api/polls');
             },
 
-            getMyPolls: function( data, username){
-                var myPolls=[];
+            getMyPolls: function (data, username) {
+                var myPolls = [];
 
                 var allPolls = data;
 
                 myPolls = filterPollsByUsername(username, allPolls);
 
                 return myPolls;
-
-
             },
 
-            setPollForNewPollPage: function(){
-                if((fromState === 'myPollsPage' || fromState === 'allVotesPage') && this.getNewPollFlag() === false){
+            setPollForNewPollPage: function () {
+                if ((fromState === 'myPollsPage' || fromState === 'allVotesPage') && this.getNewPollFlag() === false) {
                     var poll = this.getPollToBeRetrievedInNewPollsPage();
                 }
-                else{
+                else {
                     var poll = this.createPolls();
                 }
                 return poll;
             },
 
-            setToState: function(state){
+            setToState: function (state) {
                 toState = state;
             },
-            getToState: function(){
+            getToState: function () {
                 return toState;
             },
-            setFromState: function(state){
+            setFromState: function (state) {
                 fromState = state;
             },
-            getFromState: function(){
+            getFromState: function () {
                 return fromState;
             },
-            updatePoll: function(id, poll){
+            updatePoll: function (id, poll) {
                 var url = ('/api/polls/' + id).toString();
-                return $http.put( url, poll);
+                return $http.put(url, poll);
             },
-            addPoll: function(poll){
+            addPoll: function (poll) {
                 return $http.post('/api/polls', poll);
             },
 
-            deleteOption: function(arrayOfOptions, index){
-                var len= arrayOfOptions.length;
-                if(len-1 !== index){
-                    var temp = arrayOfOptions[len-1];
-                    arrayOfOptions[len-1]=arrayOfOptions[index];
-                    arrayOfOptions[index]=temp;
+            deleteOption: function (arrayOfOptions, index) {
+                var len = arrayOfOptions.length;
+                if (len - 1 !== index) {
+                    var temp = arrayOfOptions[len - 1];
+                    arrayOfOptions[len - 1] = arrayOfOptions[index];
+                    arrayOfOptions[index] = temp;
                     arrayOfOptions.pop();
                 }
-                else{
+                else {
                     arrayOfOptions.pop();
                 }
                 return arrayOfOptions;
             },
-            setPollToBeRetrievedInNewPollsPage: function(poll){
+            setPollToBeRetrievedInNewPollsPage: function (poll) {
                 oldPoll = poll;
             },
 
-            getPollToBeRetrievedInNewPollsPage: function(){
+            getPollToBeRetrievedInNewPollsPage: function () {
                 return oldPoll;
             },
 
-            getUser: function(){
+            getUser: function () {
                 return user;
             },
 
-            setUser: function(userInfo){
+            setUser: function (userInfo) {
                 user = userInfo;
             },
 
-            get: function(){
+            checkIfUsernameExists: function (username) {
+                return $http.get('/api/users/exists/' + username);
+            },
+
+            get: function () {
                 return $http.get('/api/users');
                 //return $http.get('//localhost:8080/api/users');
             },
 
-            create: function(formData){
+            create: function (formData) {
                 return $http.post('/api/users', formData);
             },
 
-            validate: function(formData, data){
+            validate: function (formData, data) {
                 var len = data.length;
                 var validation = false;
-                for(var i=0; i<len; i++){
+                for (var i = 0; i < len; i++) {
                     if (data[i].username === formData.username && data[i].password === formData.password) {
                         validation = true;
                         this.setUser(data[i]);
@@ -175,38 +177,38 @@
                 return validation;
             },
 
-            createPolls: function(){
+            createPolls: function () {
 
                 var pollObj = {};
                 pollObj.name = "";
-                pollObj.Options = [{option: "", votes: 0},{option: "", votes: 0}];
+                pollObj.Options = [{ option: "", votes: 0 }, { option: "", votes: 0 }];
                 return pollObj;
 
 
             },
 
-            update: function(id, userData){
+            update: function (id, userData) {
                 var url = ('/api/users/' + id).toString();
-                return $http.put( url, userData);
+                return $http.put(url, userData);
             },
 
-            addOneMoreOption : function(selectedPollObj){
-                selectedPollObj.Options.push({option: "", votes: 0});
+            addOneMoreOption: function (selectedPollObj) {
+                selectedPollObj.Options.push({ option: "", votes: 0 });
                 return selectedPollObj;
             },
 
-            setPollForVotingPage: function(selectedPoll){
+            setPollForVotingPage: function (selectedPoll) {
                 pollForVotingPage = selectedPoll;
             },
 
-            getPollForVotingPage: function(){
+            getPollForVotingPage: function () {
                 return pollForVotingPage;
             },
 
-            submitPolls: function(optionSelected, poll, user){
-                var len= poll.Options.length;
-                for(var i=0; i<len; i++){
-                    if(optionSelected === poll.Options[i].option){
+            submitPolls: function (optionSelected, poll, user) {
+                var len = poll.Options.length;
+                for (var i = 0; i < len; i++) {
+                    if (optionSelected === poll.Options[i].option) {
                         poll.Options[i].votes++;
                     }
                 }
@@ -220,7 +222,7 @@
                 return poll;
             },
 
-            getSingleUser: function(id, userdata){
+            getSingleUser: function (id, userdata) {
                 var url = ('/api/users/' + id).toString();
                 return $http.get(url, userdata);
             }
