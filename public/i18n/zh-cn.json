@@ -22,5 +22,7 @@
     "AppDescription": "创建自己的投票",
     "CreateNewPoll": "创建新投票",
     "MoreOptions": "更多选项",
-    "Chinese": "简体中文"
+    "Chinese": "简体中文",
+    "ChangeEmailAddress": "修改邮箱",
+    "ChangePassword": "修改密码"
 }

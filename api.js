@@ -18,7 +18,7 @@ module.exports = function (app, express) {
                     res.json({ success: false, message: err });
                 } else {
                     if (user) {
-                        var userObj = { id: user._id, username: user.username, name: user.name };
+                        var userObj = { _id: user._id, username: user.username, name: user.name };
                         var token = jwt.sign(userObj, config.jwt_secret, { expiresIn: 60 * 60 * 24 * 365 });
                         res.json({
                             success: true,
@@ -31,13 +31,48 @@ module.exports = function (app, express) {
             })
         });
 
+    router.route('/users/exists/:username')
+        .get(function (req, res) {
+            User.findOne({ username: req.params.username }, function (err, user) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    if (user) {
+                        res.send(true);
+                    } else {
+                        res.send(false)
+                    }
+                }
+            })
+        });
+
+    router.route('/signup')
+        .post(function (req, res) {
+            var user = new User();
+            user.name = req.body.name;
+            user.username = req.body.username;
+            user.password = req.body.password;
+            user.admin = req.body.admin;
+            user.toBeEdited = false;
+            user.pollNameToBeEdited = "";
+            console.log(user);
+            user.save(function (err, userCreated) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json({
+                    message: 'user created', userCreated: user
+                });
+            })
+        });
     router.use(function (req, res, next) {
         console.log('something is happenning');
         var bearerHeader = req.headers['authorization'];
         if (bearerHeader) {
             var bearer = bearerHeader.split(' ');
             var token = bearer[1];
-            
+
             if (token) {
                 jwt.verify(token, config.jwt_secret, function (err, decoded) {
                     if (err) {
@@ -52,7 +87,6 @@ module.exports = function (app, express) {
             return res.status(403).send({ success: false, message: 'No token provided.' });
         }
     });
-
 
     router.route('/polls')
         .post(function (req, res) {
@@ -121,25 +155,6 @@ module.exports = function (app, express) {
         });
 
     router.route('/users')
-        .post(function (req, res) {
-            var user = new User();
-            user.name = req.body.name;
-            user.username = req.body.username;
-            user.password = req.body.password;
-            user.admin = req.body.admin;
-            user.toBeEdited = false;
-            user.pollNameToBeEdited = "";
-            console.log(user);
-            user.save(function (err, userCreated) {
-                if (err) {
-                    res.send(err);
-                }
-
-                res.json({
-                    message: 'user created', userCreated: user
-                });
-            })
-        })
         .get(function (req, res) {
             User.find(function (err, users) {
                 if (err)
@@ -149,20 +164,6 @@ module.exports = function (app, express) {
             });
         });
 
-    router.route('/users/exists/:username')
-        .get(function (req, res) {
-            User.findOne({ username: req.params.username }, function (err, user) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    if (user) {
-                        res.send(true);
-                    } else {
-                        res.send(false)
-                    }
-                }
-            })
-        });
 
     router.route('/users/:user_id')
         .get(function (req, res) {

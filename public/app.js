@@ -1,5 +1,5 @@
 angular
-    .module('plunker', ['ui.router', 'chart.js', 'ngMessages', 'ngStorage', 'pascalprecht.translate'])
+    .module('plunker', ['ui.router', 'chart.js', 'ngMessages', 'ngStorage', 'pascalprecht.translate', 'ui.bootstrap'])
     .config(['$translateProvider', '$httpProvider', function ($translateProvider, $httpProvider) {
         var lang = window.localStorage.lang || 'zh-cn';
         $translateProvider.preferredLanguage(lang);

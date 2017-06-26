@@ -19,23 +19,23 @@
     <ul ng-repeat="pollObj in vm.polls" class="list-group">
         <li>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-7">
                     <button type="button" class="btn btn-info">
                         {{pollObj.name}}
                     </button>
                 </div>
 
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <button class="btn btn-danger" ng-click="vm.deletePoll(pollObj)"
                             ng-hide="vm.hideDeleteButton(pollObj)">{{'Delete' | translate}}
                     </button>
                 </div>
 
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <button class="btn btn-primary" ng-click="vm.editPoll(pollObj)">{{'Edit' | translate}}</button>
                 </div>
 
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <button class="btn btn-primary" ng-click="vm.vote(pollObj)">{{'Vote' | translate}}</button>
                 </div>
 

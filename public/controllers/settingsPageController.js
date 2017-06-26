@@ -18,7 +18,7 @@
         vm.submit = submit;
 
         function submit() {
-            vm.user.username = vm.username;
+            // vm.user.username = vm.username;
             vm.user.password = vm.password;
             voteGuruService.update(vm.user._id, vm.user).success(function (data) {
                 $state.go('usersHomePage');

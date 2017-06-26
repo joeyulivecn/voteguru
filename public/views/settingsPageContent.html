@@ -1,13 +1,13 @@
 <div class="container" ng-controller="settingsPageController as vm">
     <form role="form">
-        <div class="form-group">
-            <label for="email">Change Email address:</label>
+        <div class="form-group" ng-hide="true">
+            <label for="email">{{'ChangeEmailAddress' | translate}}</label>
             <input type="email" class="form-control" id="email" ng-model="vm.username">
         </div>
         <div class="form-group">
-            <label for="pwd">Change Password:</label>
+            <label for="pwd">{{'ChangePassword' | translate}}</label>
             <input type="password" class="form-control" id="pwd" ng-model="vm.password">
         </div>
-        <button type="submit" class="btn btn-default" ng-click="vm.submit()">Submit</button>
+        <button type="submit" class="btn btn-default" ng-click="vm.submit()">{{'Submit' | translate}}</button>
     </form>
 </div>

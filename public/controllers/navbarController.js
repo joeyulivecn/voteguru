@@ -1,7 +1,7 @@
 /**
  * Created by sohamchakraborty on 10/13/15.
  */
-(function (){
+(function () {
     'use strict';
 
     angular
@@ -9,7 +9,7 @@
         .controller('navbarController', navbarController);
 
 
-    function navbarController(voteGuruService, navbarService, authService) {
+    function navbarController(voteGuruService, navbarService, authService, $translate) {
         var vm = this;
 
         vm.activate = activate;
@@ -19,16 +19,30 @@
         vm.showLogin = showLogin;
         vm.showSignup = showSignup;
         vm.logout = logout;
+        vm.lang = 'Chinese';
+        vm.switchLanguage = switchLanguage;
 
         activate();
 
-        function activate(){
+        function activate() {
             console.log("navbar controller activated");
             vm.user = voteGuruService.getUser();
             // just getting user info
         }
 
-        function logout(){
+        function switchLanguage(lang) {
+            if (lang === 'zh-cn') {
+                vm.lang = 'Chinese';
+            } else if (lang === 'en-us') {
+                vm.lang = 'English';
+            } else {
+                throw new Error('Should not go here');
+            }
+            $translate.use(lang);
+        }
+
+        function logout() {
+            vm.user = {};
             authService.clearCredential();
         }
 

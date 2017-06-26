@@ -11,7 +11,7 @@
         .module('plunker')
         .factory('voteGuruService', voteGuruService);
 
-    voteGuruService.$inject = ['$http'];
+    voteGuruService.$inject = ['$http'] 
 
     function voteGuruService($http) {
 
@@ -161,7 +161,7 @@
             },
 
             create: function (formData) {
-                return $http.post('/api/users', formData);
+                return $http.post('/api/signup', formData);
             },
 
             validate: function (formData, data) {
