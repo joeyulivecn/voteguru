@@ -1,5 +1,5 @@
 Changes:
-- add multiple language support.
+- add multiple language support. (en-us, zh-cn)
 - add Json Web Token authentication.
 - optimize the workflows and fix bugs.
 
